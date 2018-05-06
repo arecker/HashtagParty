@@ -10,7 +10,8 @@ var app = new Vue({
   data: {
     newHashtag: '',
     chosenHashtags: [],
-    availableHashtags: get()
+    availableHashtags: get(),
+    deleteMode: false
   },
 
   methods: {
@@ -24,10 +25,29 @@ var app = new Vue({
       this.newHashtag = '';
     },
 
-    addChosenHashtag: function(key) {
+    addAllHashtags: function() {
+      this.chosenHashtags = this.chosenHashtags.concat(this.availableHashtags);
+      this.availableHashtags = [];
+    },
+
+    clearChosenHashtags: function() {
+      this.availableHashtags = this.availableHashtags.concat(this.chosenHashtags);
+      this.chosenHashtags = [];
+    },
+
+    toggleDeleteMode: function() {
+      this.deleteMode = !this.deleteMode;
+    },
+
+    availableHashtagClick: function(key) {
       var index = this.availableHashtags.indexOf(key);
-      this.availableHashtags.splice(index, 1);
-      this.chosenHashtags.push(key);
+
+      if (this.deleteMode) {
+	this.availableHashtags.splice(index, 1);
+      } else {
+	this.availableHashtags.splice(index, 1);
+	this.chosenHashtags.push(key);
+      }
     },
 
     removeChosenHashtag: function(key) {
@@ -44,6 +64,15 @@ var app = new Vue({
     prependHashtag: function(value) {
       if (value.charAt(0) !== '#') return '#' + value;
       return value;
+    },
+
+    copyToClipboard: function() {
+      var $temp = $("<input>");
+      $("body").append($temp);
+      $temp.val(this.chosenHashtags.join(' ')).select();
+      document.execCommand("copy");
+      $temp.remove();
+      toastr.success('Sent ' + this.chosenHashtags.length + ' hashtag(s) to clipboard.')
     }
   },
 
