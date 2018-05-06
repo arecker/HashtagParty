@@ -21,6 +21,10 @@ var app = new Vue({
 
     addNewHashtag: function() {
       var newOne = this.prependHashtag(this.newHashtag);
+      if (this.chosenHashtags.indexOf(newOne) !== -1) {
+	toastr.warning(newOne + ' already in list');
+	return;
+      }
       this.chosenHashtags.push(newOne);
       this.newHashtag = '';
     },
