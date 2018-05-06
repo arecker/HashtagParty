@@ -20,11 +20,18 @@ var app = new Vue({
     },
 
     addNewHashtag: function() {
-      var newOne = this.prependHashtag(this.newHashtag);
+      var newOne = this.prependHashtag(this.newHashtag),
+	  availableIndex = this.availableHashtags.indexOf(newOne);
+
       if (this.chosenHashtags.indexOf(newOne) !== -1) {
 	toastr.warning(newOne + ' already in list');
 	return;
       }
+
+      if (availableIndex !== -1) {
+	this.availableHashtags.splice(availableIndex, 1);
+      }
+
       this.chosenHashtags.push(newOne);
       this.newHashtag = '';
     },
