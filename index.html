@@ -14,29 +14,29 @@
       <main id="app" role="main">
 	<div class="row app">
 	  <div class="col-lg">
-	    <div class="btn-group" role="group" aria-label="Basic example">
-	      <button type="button" class="btn btn-light my-1" v-on:click="copyToClipboard()" >
-		copy <span class="badge badge-light" v-bind:class="{'text-muted': chosenHashtags.length < 20, 'text-warning': 20 < chosenHashtags.length < 30, 'text-danger': chosenHashtags.length > 30}">
-		{{ chosenHashtags.length }} / 30
-		</span>
-	      </button>
-	      <button type="button" class="btn btn-light my-1" v-on:click="addAllHashtags()">all</button>
-	      <button type="button" class="btn btn-light my-1" v-on:click="clearChosenHashtags()">clear</button>
+	    <div class="input-group mb-3">
+	      <div class="input-group-prepend">
+		<button type="button" class="btn btn-light" v-on:click="copyToClipboard()" >
+		  copy <span class="badge badge-light" v-bind:class="{'text-muted': chosenHashtags.length < 20, 'text-warning': 20 < chosenHashtags.length < 30, 'text-danger': chosenHashtags.length > 30}">
+		  {{ chosenHashtags.length }} / 30
+		  </span>
+		</button>
+		<button type="button" class="btn btn-light" v-on:click="addAllHashtags()">all</button>
+		<button type="button" class="btn btn-light" v-on:click="clearChosenHashtags()">clear</button>
+	      </div>
+	      <input type="text" class="form-control" autofocus
+		     aria-label="value" aria-describedby="value"
+		     v-model="newHashtag" @keyup.enter="addNewHashtag">
 	    </div>
+	  </div>
+	</div>
+	<div class="row app">
+	  <div class="col-lg">
 	    <ul class="list-inline">
 	      <li class="list-inline-item" v-for="hashtag in chosenHashtags">
 		<button v-on:click="removeChosenHashtag(hashtag)" type="button" class="btn btn-info my-1">{{ hashtag }}</button>
 	      </li>
 	    </ul>
-	  </div>
-	</div>
-	<div class="row app">
-	  <div class="col-lg">
-	    <div class="input-group input-group-lg">
-	      <input type="text" class="form-control" autofocus
-		     aria-label="value" aria-describedby="value"
-		     v-model="newHashtag" @keyup.enter="addNewHashtag">
-	    </div>
 	  </div>
 	</div>
 	<div class="row app">
