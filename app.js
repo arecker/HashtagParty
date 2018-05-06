@@ -1,24 +1,26 @@
+function get() {
+  return [
+    '#365', '#365dayproject', '#365daychallenge', '#365challenge', '#dailychallenge', '#mixedmedia', '#mixedmediaart', '#alcoholink', '#alcoholinkart', '#alcoholinkartist', '#fluidart', '#fluidartwork', '#artflow', '#artflowsession', '#artflowsessions', '#originalart', '#artforsale', '#yupo', '#yupoart', '#madison', '#madisonart', '#madisonartist', '#wisconsin', '#astuaryart'
+    ]
+}
+
 var app = new Vue({
   el: '#app',
 
   data: {
     newHashtag: '',
     chosenHashtags: [],
-    availableHashtags: [
-      '#astuaryart', '#madisonart', '#art',
-      '#365daysofart', '#madisonartscene',
-      '#springart', '#midwestart', '#liquidart',
-      '#Astuary', '#ArtByMarissaRecker', '#marissarecker', '#instagramshill'
-    ]
+    availableHashtags: get()
   },
 
   methods: {
     alphabetized: function(list) {
-      return list;
+      return list.concat().sort();
     },
 
     addNewHashtag: function() {
-      this.chosenHashtags.push(this.newHashtag);
+      var newOne = this.prependHashtag(this.newHashtag);
+      this.chosenHashtags.push(newOne);
       this.newHashtag = '';
     },
 
@@ -35,7 +37,12 @@ var app = new Vue({
     },
 
     stripHashtag: function(value) {
-      if (value.charAt(0) == '#') return value.substring(1);
+      if (value.charAt(0) === '#') return value.substring(1);
+      return value;
+    },
+
+    prependHashtag: function(value) {
+      if (value.charAt(0) !== '#') return '#' + value;
       return value;
     }
   },
