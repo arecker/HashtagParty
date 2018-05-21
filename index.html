@@ -15,18 +15,18 @@
 	<div class="row app">
 	  <div class="col-lg">
 	    <div class="input-group mb-3">
-	      <div class="input-group-prepend">
-		<button type="button" class="btn btn-light" v-on:click="copyToClipboard()" >
-		  copy <span class="badge badge-light" v-bind:class="{'text-muted': chosenHashtags.length < 20, 'text-warning': 20 < chosenHashtags.length < 30, 'text-danger': chosenHashtags.length > 30}">
-		  {{ chosenHashtags.length }} / 30
-		  </span>
-		</button>
-		<button type="button" class="btn btn-light" v-on:click="addAllHashtags()">all</button>
-		<button type="button" class="btn btn-light" v-on:click="clearChosenHashtags()">clear</button>
-	      </div>
 	      <input type="text" class="form-control" autofocus
 		     aria-label="value" aria-describedby="value"
 		     v-model="newHashtag" @keyup.enter="addNewHashtag">
+	    </div>
+	    <div class="input-group">
+	      <button type="button" class="btn btn-light" v-on:click="copyToClipboard()" >
+		copy <span class="badge badge-light" v-bind:class="{'text-muted': chosenHashtags.length < 20, 'text-warning': 20 < chosenHashtags.length < 30, 'text-danger': chosenHashtags.length > 30}">
+		{{ chosenHashtags.length }} / 30
+		</span>
+	      </button>
+	      <button type="button" class="btn btn-light" v-on:click="addAllHashtags()">all</button>
+	      <button type="button" class="btn btn-light" v-on:click="clearChosenHashtags()">clear</button>
 	    </div>
 	  </div>
 	</div>
